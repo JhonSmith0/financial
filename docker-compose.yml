@@ -1,0 +1,56 @@
+version: '3'
+services:
+    traefik:
+        image: "traefik:v2.11"
+        container_name: "traefik"
+        command:
+            - "--api.insecure=true"
+            - "--providers.docker=true"
+            - "--providers.docker.exposedbydefault=false"
+            - "--entrypoints.web.address=:80"
+        ports:
+            - "80:80"
+            - "8080:8080"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+    nginx:
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        env_file:
+            - .env
+            - .env.${APP_ENV}
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.nginx.rule=Host(`financial.localhost`)"
+            - "traefik.http.routers.nginx.entrypoints=web"
+
+    app:
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile
+        env_file:
+            - .env
+            - .env.${APP_ENV}
+        expose:
+            - 80:80
+        entrypoint: sh -c "chmod +x ./docker/php/entrypoint.sh && ./docker/php/entrypoint.sh";
+        volumes:
+            - ./:/var/www/html
+
+    db:
+        build:
+            context: .
+            dockerfile: ./docker/postgres/Dockerfile
+        restart: always
+        env_file:
+            - .env
+            - .env.${APP_ENV}
+        ports:
+            - 5432:5432
+        volumes:
+            - ./volumes/db:/var/lib/postgresql/data
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.database.rule=Host(`database.financial.localhost`)"
