@@ -9,6 +9,7 @@ RUN groupadd -g 1000 app
 RUN useradd -u 1000 -g 1000 -ms /bin/bash app
 RUN useradd -ms /bin/bash nginx
 RUN usermod -aG sudo app
+RUN usermod -aG www-data app
 
 RUN chown app /var/www/html
 
