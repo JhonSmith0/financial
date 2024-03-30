@@ -38,4 +38,16 @@ class UserService implements UserServiceContract
         if (!$user) throw new HttpException(404, 'Usuário não encontrado');
         return $user;
     }
+
+    public function getUserByEmail(string $email): UserDTO
+    {
+        $user = $this->userRepo->getUserByEmail($email);
+        if (!$user) throw new HttpException(404, 'Usuário não encontrado');
+        return $user;
+    }
+
+    public function compareUserPassword(string $hashed_password, string $plain_password): bool
+    {
+        return Hash::check($plain_password, $hashed_password);
+    }
 }
