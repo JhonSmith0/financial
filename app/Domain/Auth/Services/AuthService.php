@@ -41,15 +41,39 @@ class AuthService implements AuthServiceContract
         }
     }
 
+    public function validateUserToken(?string $token): UserDTO
+    {
+        $erro = new HttpException(401, 'Token inválido');
+        if (!$token) throw $erro;
+        try {
+            $data = $this->jwtService->decode($token);
+            $id = $data['id'] ?? null;
+            $type = $data['type'] ?? null;
+
+            if (!$id || $type !== 'access_token') throw $erro;
+
+            $user = $this->userService->getUserById($id);
+            return $user;
+        } catch (\Throwable $th) {
+            throw $erro;
+        }
+    }
+
+
     private function generateResponseForUser(UserDTO $user)
     {
         $iat = Carbon::now()->timestamp;
-        $data = [
+        $access_token_payload = [
             "id" => $user->id,
+            "type" => "access_token",
+        ];
+        $refresh_token_payload = [
+            "id" => $user->id,
+            "type" => "refresh_token",
         ];
 
-        $access_token = $this->jwtService->encode($data, $iat, Carbon::now()->addDays(1)->timestamp);
-        $refresh_token = $this->jwtService->encode($data, $iat, Carbon::now()->addDays(7)->timestamp);
+        $access_token = $this->jwtService->encode($access_token_payload, Carbon::now()->addDays(1)->timestamp, $iat);
+        $refresh_token = $this->jwtService->encode($refresh_token_payload, Carbon::now()->addDays(7)->timestamp, $iat);
         $user = SafeUserDTO::from($user);
 
         return ResponseTokenDTO::from(compact(
