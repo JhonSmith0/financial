@@ -19,9 +19,10 @@ class PersonRepository implements PersonRepositoryContract
         return PersonDTO::from(Person::create($data->toArray()));
     }
 
-    public function update(int $id, PutPersonDTO $data): ?PersonDTO
+    public function update(int $id, string $userId, PutPersonDTO $data): ?PersonDTO
     {
-        $result = Person::find($id);
+        //@phpstan-ignore-next-line
+        $result = Person::query()->where('id', $id)->where('user_id', $userId)->get()->first();
         if (is_null($result)) {
             return $result;
         }
