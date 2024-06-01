@@ -28,6 +28,7 @@ class UserRepository implements UserRepositoryContract
 
     public function getUserByEmail(string $user_email): ?UserDTO
     {
+        // @phpstan-ignore-next-line
         $user = User::query()->where('email', $user_email)->get()->first();
         return $user ? UserDTO::from($user) : null;
     }

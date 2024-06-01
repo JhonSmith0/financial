@@ -10,7 +10,10 @@ use Illuminate\Support\ServiceProvider;
 
 class UserProvider extends ServiceProvider
 {
-    public $bindings = [
+    /**
+     * @var array<string, string>
+     */
+    public array $bindings = [
         UserRepositoryContract::class => UserRepository::class,
         UserServiceContract::class => UserService::class,
     ];
