@@ -35,7 +35,7 @@ class PersonController extends Controller
     }
     public function update(int $personId, PutPersonDTO $data): PersonDTO
     {
-        return $this->personService->update($personId, $data);
+        return $this->personService->update($personId, $this->currentUser->user()->id,  $data);
     }
 
     /**

@@ -13,7 +13,7 @@ interface PersonServiceContract
     public function create(CreatePersonDTO $data): PersonDTO;
     public function find(int $id, ?string $userId): PersonDTO;
     public function delete(int $id, ?string $userId): bool;
-    public function update(int $id, PutPersonDTO $data): PersonDTO;
+    public function update(int $id, string $userId,  PutPersonDTO $data): PersonDTO;
 
     /**
      * @return SupportCollection<int, PersonDTO>
