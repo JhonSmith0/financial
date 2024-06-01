@@ -12,7 +12,7 @@ use Illuminate\Support\Collection as SupportCollection;
 interface PersonRepositoryContract
 {
     public function create(CreatePersonDTO $data): PersonDTO;
-    public function update(int $id, PutPersonDTO $data): ?PersonDTO;
+    public function update(int $id, string $userId,  PutPersonDTO $data): ?PersonDTO;
 
     public function find(int $id, ?string $userId = null): ?PersonDTO;
     public function delete(int $id, ?string $userId = null): bool;

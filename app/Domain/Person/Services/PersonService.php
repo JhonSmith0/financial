@@ -38,9 +38,9 @@ class PersonService implements PersonServiceContract
         }
         return $result;
     }
-    public function update(int $id, PutPersonDTO $data): PersonDTO
+    public function update(int $id, string $userId,  PutPersonDTO $data): PersonDTO
     {
-        $result = $this->personRepository->update($id, $data);
+        $result = $this->personRepository->update($id, $userId, $data);
         if (!$result) {
             throw new NotFoundHttpException("Pessoa não encontrada!");
         }
