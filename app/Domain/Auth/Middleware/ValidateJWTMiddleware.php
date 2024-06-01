@@ -14,8 +14,11 @@ class ValidateJWTMiddleware
     ) {
     }
 
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next): mixed
     {
+        /**
+         * @var string
+         */
         $token = $request->header('Authorization');
         $user = $this->authService->validateUserToken($token);
         set_user($user);

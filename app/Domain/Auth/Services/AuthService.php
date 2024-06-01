@@ -47,10 +47,13 @@ class AuthService implements AuthServiceContract
         if (!$token) throw $erro;
         try {
             $data = $this->jwtService->decode($token);
+            /**
+             * @var string
+             */
             $id = $data['id'] ?? null;
             $type = $data['type'] ?? null;
 
-            if (!$id || $type !== 'access_token') throw $erro;
+            if (!$id || $type !== 'access_token' || !is_string($type)) throw $erro;
 
             $user = $this->userService->getUserById($id);
             return $user;
@@ -60,7 +63,7 @@ class AuthService implements AuthServiceContract
     }
 
 
-    private function generateResponseForUser(UserDTO $user)
+    private function generateResponseForUser(UserDTO $user): ResponseTokenDTO
     {
         $iat = Carbon::now()->timestamp;
         $access_token_payload = [
@@ -72,8 +75,8 @@ class AuthService implements AuthServiceContract
             "type" => "refresh_token",
         ];
 
-        $access_token = $this->jwtService->encode($access_token_payload, Carbon::now()->addDays(1)->timestamp, $iat);
-        $refresh_token = $this->jwtService->encode($refresh_token_payload, Carbon::now()->addDays(7)->timestamp, $iat);
+        $access_token = $this->jwtService->encode($access_token_payload, (int) Carbon::now()->addDays(1)->timestamp, (int) $iat);
+        $refresh_token = $this->jwtService->encode($refresh_token_payload, (int) Carbon::now()->addDays(7)->timestamp, (int) $iat);
         $user = SafeUserDTO::from($user);
 
         return ResponseTokenDTO::from(compact(
