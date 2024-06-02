@@ -3,7 +3,9 @@
 
 </script>
 
-<template></template>
+<template>
+    <RouterView/>
+</template>
 
 <style scoped>
 @tailwind base;

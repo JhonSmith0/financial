@@ -5,12 +5,18 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  vee-validate:
+    specifier: ^4.12.8
+    version: 4.12.8(vue@3.4.21)
   vue:
     specifier: ^3.4.15
     version: 3.4.21(typescript@5.3.3)
   vue-router:
     specifier: ^4.2.5
     version: 4.3.0(vue@3.4.21)
+  yup:
+    specifier: ^1.4.0
+    version: 1.4.0
 
 devDependencies:
   '@tsconfig/node20':
@@ -29,7 +35,7 @@ devDependencies:
     specifier: ^10.4.18
     version: 10.4.18(postcss@8.4.35)
   axios:
-    specifier: ^1.6.4
+    specifier: ^1.6.7
     version: 1.6.7
   laravel-vite-plugin:
     specifier: ^1.0.0
@@ -1268,6 +1274,10 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
 
+  /property-expr@2.0.6:
+    resolution: {integrity: sha512-SVtmxhRE/CGkn3eZY1T6pC8Nln6Fr/lu1mKSgRud0eC73whjGfoAogbn78LkD8aFL0zz3bAFerKSnOl7NlErBA==}
+    dev: false
+
   /proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
     dev: true
@@ -1468,6 +1478,10 @@ packages:
       any-promise: 1.3.0
     dev: true
 
+  /tiny-case@1.0.3:
+    resolution: {integrity: sha512-Eet/eeMhkO6TX8mnUteS9zgPbUMQa4I6Kkp5ORiBD5476/m+PIRiumP5tmh5ioJpH7k51Kehawy2UDfsnxxY8Q==}
+    dev: false
+
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
     engines: {node: '>=4'}
@@ -1479,9 +1493,23 @@ packages:
       is-number: 7.0.0
     dev: true
 
+  /toposort@2.0.2:
+    resolution: {integrity: sha512-0a5EOkAUp8D4moMi2W8ZF8jcga7BgZd91O/yabJCFY8az+XSzeGyTKs0Aoo897iV1Nj6guFq8orWDS96z91oGg==}
+    dev: false
+
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
+
+  /type-fest@2.19.0:
+    resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
+    engines: {node: '>=12.20'}
+    dev: false
+
+  /type-fest@4.18.3:
+    resolution: {integrity: sha512-Q08/0IrpvM+NMY9PA2rti9Jb+JejTddwmwmVQGskAlhtcrw1wsRzoR6ode6mR+OAabNa75w/dxedSUY2mlphaQ==}
+    engines: {node: '>=16'}
+    dev: false
 
   /typescript@5.3.3:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
@@ -1506,6 +1534,16 @@ packages:
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /vee-validate@4.12.8(vue@3.4.21):
+    resolution: {integrity: sha512-A07rm3+y7SRk0CMD/O4nBT0nxtwjyfzGZwjEUDk18SxK0ZMzd4AFCzzdHlIiCE1QgHetxd0I3kVkZdN0GG0Oww==}
+    peerDependencies:
+      vue: ^3.4.26
+    dependencies:
+      '@vue/devtools-api': 6.6.1
+      type-fest: 4.18.3
+      vue: 3.4.21(typescript@5.3.3)
+    dev: false
 
   /vite-plugin-full-reload@1.1.0:
     resolution: {integrity: sha512-3cObNDzX6DdfhD9E7kf6w2mNunFpD7drxyNgHLw+XwIYAgb+Xt16SEXo0Up4VH+TMf3n+DSVJZtW2POBGcBYAA==}
@@ -1628,3 +1666,12 @@ packages:
     engines: {node: '>= 14'}
     hasBin: true
     dev: true
+
+  /yup@1.4.0:
+    resolution: {integrity: sha512-wPbgkJRCqIf+OHyiTBQoJiP5PFuAXaWiJK6AmYkzQAh5/c2K9hzSApBZG5wV9KoKSePF7sAxmNSvh/13YHkFDg==}
+    dependencies:
+      property-expr: 2.0.6
+      tiny-case: 1.0.3
+      toposort: 2.0.2
+      type-fest: 2.19.0
+    dev: false

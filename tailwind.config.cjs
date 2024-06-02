@@ -2,7 +2,14 @@
 module.exports = {
     content: ["./resources/**/*.{vue,html,jsx,ts,tsx,js}"],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                'inter': ['Inter'],
+                'poppins': ['Poppins'],
+                'roboto': ['Roboto'],
+                'rubik': ['Rubik'],
+            }
+        },
     },
     plugins: [],
 }
