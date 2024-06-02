@@ -20,7 +20,6 @@ const [email, emailAttrs] = form.defineField('email');
 const [password, passwordAttrs] = form.defineField('password');
 
 const loading = ref(false);
-const error = ref('')
 
 const onSubmit = form.handleSubmit(async function (values) {
     if (loading.value) return;
